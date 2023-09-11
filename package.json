@@ -1,0 +1,19 @@
+{
+  "name": "dogger",
+  "version": "1.0.0",
+  "description": "Dogger is a Discord Bot that notifies you of offers on eBay (or other sites, it can be improved) and monitors articles to notify you when changes occur, based on Node.js",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Andres-Victor",
+  "license": "ISC",
+  "dependencies": {
+    "ascii-table": "^0.0.9",
+    "cheerio": "^1.0.0-rc.12",
+    "discord.js": "^14.12.1",
+    "dotenv": "^16.3.1",
+    "fs": "^0.0.1-security",
+    "glob": "^8.0.3"
+  }
+}
