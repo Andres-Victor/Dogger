@@ -34,16 +34,14 @@ function getUserThemeList(userID) {
   const list = getUserThemesList(userID);
   return list;
 }
-//Revisa los clips de los usuarios(premiuns?) y les envia a cada uno cualquier cambio sucedido
-async function checkClips(onlyPremium = false) {
+//Revisa los clips de los usuarios y les envia a cada uno cualquier cambio sucedido
+async function checkClips() {
   const client = global.discordClient;
   const clips = getClipedItems();
   for (let i = 0; i < clips.length; i++) {
     const clip = clips[i];
     const previusClipResult = clip.lastItemResult;
     let subs = clip.subscribers;
-    if (onlyPremium) subs = subs.filter((sub) => sub.isPremium === true);
-    if (subs.length < 0) continue;
 
     let currentResult = await CheckArticlePage(clip.itemUrl);
 

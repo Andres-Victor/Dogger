@@ -7,7 +7,6 @@ let executedHistory =
 {
     lastSubCheck: null,
     normalClipCheck: null,
-    premiumClipCheck: null
 }
 fileRead("WatcherResources/data/execution/executedHistory.his").then( res => {if(res !== 500) {executedHistory = res;} else saveExecutedHistory()});
 
@@ -63,7 +62,6 @@ function checkActions(offers, clipCheck) {
             offers();
             clipCheck();
             executedHistory.normalClipCheck = currentTime;
-            executedHistory.premiumClipCheck = currentTime;
             executedHistory.lastSubCheck = currentTime;
             saveExecutedHistory();
             return;
@@ -71,8 +69,7 @@ function checkActions(offers, clipCheck) {
 
         const toCheck = {
             offersCheck: checkSuperiorTime(executedHistory.lastSubCheck, currentTime).dayDif > 0,
-            clipCheck: checkSuperiorTime(executedHistory.normalClipCheck, currentTime).hourDif >= 2,
-            proClipCheck: checkSuperiorTime(executedHistory.premiumClipCheck, currentTime).minuteDif >= 30 || checkSuperiorTime(executedHistory.premiumClipCheck, currentTime).hourDif > 0
+            clipCheck: checkSuperiorTime(executedHistory.normalClipCheck, currentTime).hourDif >= 2
         }
 
         if (toCheck.offersCheck) {
@@ -86,12 +83,6 @@ function checkActions(offers, clipCheck) {
             console.log("Check Hour clip Trigged");
             setTimeout(()=>clipCheck(), randomNumber(2000,5000))
             executedHistory.normalClipCheck = currentTime;
-            saveExecutedHistory();
-        }
-        if (toCheck.proClipCheck) {
-            console.log("Check 30 minutes clip Pro Trigged");
-            setTimeout(()=>clipCheck(true), randomNumber(2000,5000))
-            executedHistory.premiumClipCheck = currentTime;
             saveExecutedHistory();
         }
     } catch (error) {
