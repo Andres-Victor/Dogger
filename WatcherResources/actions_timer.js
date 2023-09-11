@@ -68,7 +68,7 @@ function checkActions(offers, clipCheck) {
         }
 
         const toCheck = {
-            offersCheck: checkSuperiorTime(executedHistory.lastSubCheck, currentTime).dayDif > 0,
+            offersCheck: checkSuperiorTime(executedHistory.lastSubCheck, currentTime).dayDif > 0 && currentTime.hour >= 18,
             clipCheck: checkSuperiorTime(executedHistory.normalClipCheck, currentTime).hourDif >= 1
         }
 
