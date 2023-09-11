@@ -3,12 +3,10 @@ const { fileRead, fileWrite } = require('./fileManager');
 
 
 let themesInfo = [];
-let proUsers = []
 let clipedItems = [];
 const jsonStates = {theme:true, cliped: true}
   fileRead("WatcherResources/data/themeSubscribers.json").then((content)=>{if(content != 500)themesInfo = content});
   fileRead("WatcherResources/data/itemsClipped.json").then((content)=>{if(content != 500)clipedItems = content});
-  fileRead("WatcherResources/data/UsersData/proUsers.json").then((content)=>{if(content != 500)proUsers = content});
 function getThemesInfo()
 {
     return themesInfo;
@@ -108,11 +106,7 @@ function addTheme(themeName, subscribers_, presupuesto, filters) {
 async function addClip(clipUrl, userID)
 {
   let clipFound, userFound = false;
-  const user = {messageId: userID, isPremium: false}
-  if(proUsers.find(user => {if(user === userID) return true;}) == true)
-  {
-    user.isPremium = true;
-  }
+  const user = {messageId: userID}
   
   clipedItems.find(item => {
     if(item.itemUrl === clipUrl)
@@ -121,7 +115,6 @@ async function addClip(clipUrl, userID)
       return item.subscribers.find(sub => {
         if(sub.messageId === user.messageId)
         {  
-          sub.isPremium = user.isPremium;
           return userFound = true;
         }
       });
